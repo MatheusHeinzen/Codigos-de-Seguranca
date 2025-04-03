@@ -1,13 +1,16 @@
-# Matheus Henrique Heinzen e Vinicius Lima Teider
+#Matheus Henrique Heinzen e Vinicius Lima Teider
+
+#Rode o código para que seja criado os dados em Json.
 
 import json
 import os
 import getpass
 
+#Inicializa os arquivos como variaveis
 USUARIOS_JSON = "usuarios.json"
 PERMISSOES_JSON = "permissoes.json"
 
-def inicializar_dados():
+def inicializarDados():
     if not os.path.exists(USUARIOS_JSON):
         usuarios = {
             "adm": "admin123",
@@ -29,42 +32,42 @@ def inicializar_dados():
         with open(PERMISSOES_JSON, "w") as arquivo:
             json.dump(permissoes, arquivo, indent=4)
 
-def carregar_usuarios():
+def carregarUsuarios():
     with open(USUARIOS_JSON, "r") as arquivo:
         return json.load(arquivo)
 
-def salvar_usuarios(usuarios):
+def salvarUsuarios(usuarios):
     with open(USUARIOS_JSON, "w") as arquivo:
         json.dump(usuarios, arquivo, indent=4)
 
-def carregar_permissoes():
+def carregarPermissoes():
     with open(PERMISSOES_JSON, "r") as arquivo:
         return json.load(arquivo)
 
-def salvar_permissoes(permissoes):
+def salvarPermissoes(permissoes):
     with open(PERMISSOES_JSON, "w") as arquivo:
         json.dump(permissoes, arquivo, indent=4)
 
 def autenticar(login, senha):
-    usuarios = carregar_usuarios()
+    usuarios = carregarUsuarios()
     return usuarios.get(login) == senha
 
-def cadastrar_usuario():
-    usuarios = carregar_usuarios()
+def cadastrarUsuario():
+    usuarios = carregarUsuarios()
     login = input("Digite o novo login: ")
     if login in usuarios:
         print("Usuário já existe!")
         return
     senha = getpass.getpass("Digite a senha: ")
     usuarios[login] = senha
-    salvar_usuarios(usuarios)
-    permissoes = carregar_permissoes()
+    salvarUsuarios(usuarios)
+    permissoes = carregarPermissoes()
     permissoes.append({"nome": login, "permissoes": {"leitura": [], "escrita": [], "apagar": []}})
-    salvar_permissoes(permissoes)
+    salvarPermissoes(permissoes)
     print("Usuário cadastrado com sucesso!")
 
 def verificar_permissao(usuario, recurso, acao):
-    permissoes = carregar_permissoes()
+    permissoes = carregarPermissoes()
     for perm in permissoes:
         if perm["nome"] == usuario:
             return recurso in perm["permissoes"].get(acao, [])
@@ -76,7 +79,7 @@ def editar_permissoes():
     if login != "adm" or not autenticar(login, senha):
         print("Apenas o administrador pode editar permissões!")
         return
-    permissoes = carregar_permissoes()
+    permissoes = carregarPermissoes()
     usuario = input("Digite o login do usuário para editar permissões: ")
     for perm in permissoes:
         if perm["nome"] == usuario:
@@ -89,7 +92,7 @@ def editar_permissoes():
             else:
                 perm["permissoes"].setdefault(acao, []).append(recurso)
                 print("Permissão adicionada com sucesso!")
-            salvar_permissoes(permissoes)
+            salvarPermissoes(permissoes)
             return
     print("Usuário não encontrado!")
 
@@ -105,7 +108,7 @@ def solicitar_permissao(usuario):
             print("Acesso negado")
 
 def menu():
-    inicializar_dados()
+    inicializarDados()
     while True:
         escolha = input("Escolha uma opção:\n1 - Login\n2 - Cadastrar usuário\n3 - Editar permissões\n4 - Sair\nOpção: ")
         if escolha == "1":
@@ -117,7 +120,7 @@ def menu():
             else:
                 print("Usuário ou senha inválidos")
         elif escolha == "2":
-            cadastrar_usuario()
+            cadastrarUsuario()
         elif escolha == "3":
             editar_permissoes()
         elif escolha == "4":
