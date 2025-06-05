@@ -21,4 +21,4 @@ a quebra de hash de 4 usuários (tempo total e tempo por senha). Código feito c
 
 ## 3. Solução para redução de Força Bruta
 
-Keystretching foi a solução no arquivo `cadastro_reforcado.py` , ele aplica o hash na senha milhares de vezes (como definido no código python na var `iteracoes`) fazendo com que a senha fique praticamente inquebrável para o brute force criado antes de aplicar a solução. Também deixa cada tentativa de quebrar a senha muito mais lenta do que o normal, pois demoraria horas e até dias para quebrar uma senha ou nem conseguiria quebrar.
+Keystretching foi a solução no arquivo `cadastro_reforcado.py` , ele aplica o hash na senha 20 vezes (como definido no código python na var `iteracoes`) fazendo com que a senha fique praticamente inquebrável para o brute force criado antes de aplicar a solução. Também deixa cada tentativa de quebrar a senha muito mais lenta do que o normal, pois demoraria horas e até dias para quebrar uma senha ou nem conseguiria quebrar caso houvesse mais iterações.

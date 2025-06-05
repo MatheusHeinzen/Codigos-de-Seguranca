@@ -7,7 +7,7 @@ import random
 import string
 
 pARQUIVO_USUARIOS = "usuarios.txt"
-pITERACOES = 200000  # aumento grande para dificultar força bruta
+pITERACOES = 20
 
 def phash_senha_forte(senha, iteracoes=pITERACOES):
     hash_valor = senha.encode()
