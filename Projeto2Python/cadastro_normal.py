@@ -23,21 +23,21 @@ def salvar_usuarios(usuarios):
         for nome, senha_hash in usuarios.items():
             f.write(f"{nome},{senha_hash}\n")
 
-def xobter_entrada_usuario():
-    nome = input("Nome (4 caracteres): ").strip()
-    senha = input("Senha (4 caracteres): ").strip()
+def obter_entrada_usuario():
+    nome = input("Nome: ").strip()
+    senha = input("Senha: ").strip()
     if len(nome) != 4 or len(senha) != 4:
         print("Nome e senha devem ter exatamente 4 caracteres.")
         return None, None
     return nome, senha
 
-def xprocessar_usuario():
+def processar_usuario():
     usuarios = carregar_usuarios()
     print("1 - Cadastrar\n2 - Autenticar")
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
-        nome, senha = xobter_entrada_usuario()
+        nome, senha = obter_entrada_usuario()
         if not nome or nome in usuarios:
             print("Usuário inválido ou já existe.")
             return
@@ -46,13 +46,13 @@ def xprocessar_usuario():
         print("Usuário cadastrado com sucesso.")
 
     elif opcao == "2":
-        nome, senha = xobter_entrada_usuario()
+        nome, senha = obter_entrada_usuario()
         if nome in usuarios and usuarios[nome] == hash_senha(senha):
-            print("Autenticação bem-sucedida. ✅")
+            print("Autenticação bem-sucedida.")
         else:
-            print("Falha na autenticação. ❎")
+            print("Falha na autenticação.")
     else:
         print("Opção inválida.")
 
-while True:
-    xprocessar_usuario()
+
+processar_usuario()

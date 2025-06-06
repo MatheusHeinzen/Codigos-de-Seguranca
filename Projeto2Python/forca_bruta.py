@@ -65,9 +65,9 @@ def quebrar_todas_as_senhas():
         tempos.append(tempo)
         resultados[nome] = (senha_encontrada, tipo_hash, tempo)
         if senha_encontrada:
-            print(f"✅ Senha encontrada: {senha_encontrada} | Tipo: {tipo_hash} | Tempo: {tempo:.2f}s")
+            print(f"Senha encontrada: {senha_encontrada} | Tipo: {tipo_hash} | Tempo: {tempo:.2f}s")
         else:
-            print("❌ Senha não encontrada")
+            print("Senha não encontrada")
 
     tempo_total_fim = time.time()
     tempo_total = tempo_total_fim - tempo_total_inicio
