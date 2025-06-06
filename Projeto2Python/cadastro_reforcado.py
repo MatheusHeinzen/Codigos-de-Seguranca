@@ -1,5 +1,4 @@
-## Adrian Antônio de Souza Gomes
-## Matheus Henrique Heinzen
+## Adrian Antônio de Souza Gomes e Matheus Henrique Heinzen
 
 import hashlib
 import os

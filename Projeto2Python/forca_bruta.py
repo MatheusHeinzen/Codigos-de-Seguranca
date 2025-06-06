@@ -1,3 +1,5 @@
+## Adrian Antônio de Souza Gomes e Matheus Henrique Heinzen
+
 import hashlib
 import itertools
 import string
